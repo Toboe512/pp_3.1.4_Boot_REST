@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <!-- TODO заголовок -->
+    <div class="w-100 p-3" style="background-color: #343a40;">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <span class="navbar-text" id="user_authentication">
+
+        </span>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 ms-lg-0 ">
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!--                                   TODO Панель пользователя -->
+<div class="container-fluid" id="user_page">
+    <div class="row">
+        <div class="col-2 bg-white pt-3 min-vh-100 px-0">
+            <div class="list-group">
+                <div class="list-group" >
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="list-group-item list-group-item-action active">User</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col bg-light">
+            <h2><b>  User information-page </b></h2>
+
+            <div class="container-fluid border bg-light">
+                <h4><b> About user</b></h4>
+            </div>
+
+            <div class="container-fluid border bg-white px-4 py-3 border-top">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody id="user_info">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/AuthData.js"></script>
+<script>
+    fillHeader(getAuthentication());
+    fillUserAuth(getAuthentication());
+</script>
+
+</body>
+</html>

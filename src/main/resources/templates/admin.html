@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script type="text/javascript" src="/js/ShowPage.js"></script>
+</head>
+<body>
+
+<header>
+    <!-- TODO заголовок -->
+    <div class="w-100 p-3" style="background-color: #343a40;">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <span class="navbar-text" id="user_authentication">
+
+        </span>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 ms-lg-0 ">
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<!--                                   TODO Панель админа                                   -->
+<div class="container-fluid" id="admin_page" style="display: block">
+    <div class="row">
+        <div class="col-2 bg-white pt-3 min-vh-100 px-0">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" >Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="return show('user_page', 'admin_page');">User</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--- TODO таблица пользователей -->
+        <div class="col bg-light" id="user_table" style="display: block;" >
+            <h2><b> Admin panel</b></h2>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" >User table</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="return show('new_user', 'user_table');">New user</a>
+                </li>
+            </ul>
+            <div class="container-fluid border">
+                <h4><b> All users</b></h4>
+            </div>
+            <div class="container-fluid border bg-white px-4 py-3 border-top">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody id="users_tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--TODO Создание нового пользователя -->
+        <div class="col bg-light" id="new_user" style="display: none">
+            <h2><b> Admin panel</b></h2>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="return show('user_table', 'new_user');">User table</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">New user</a>
+                </li>
+            </ul>
+
+            <div class="container-fluid border bg-light">
+                <h4><b> Add new user</b></h4>
+            </div>
+            <div class="container-fluid border px-4 py-3 border-top bg-white">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <form method="POST" action="/admin" id="create_form">
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="first_name">First name</label></b><br>
+                                    <input type="text" name="firstName" id="first_name" required/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="last_name">Lastname</label></b><br>
+                                    <input type="text" name="lastName" id="last_name" required/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="age">Age</label></b><br>
+                                    <input type="number" name="age" id="age" required/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="username">Email</label></b><br>
+                                    <input type="email" name="username" id="username" required/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="password">Password</label></b><br>
+                                    <input type="password" name="password" id="password" required/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <b><label for="role">Role</label></b><br>
+                                    <select multiple class="form-control" id="role"
+                                            name="roles_string"
+                                            size="2"
+                                            required>
+                                        <option value="1">USER</option>
+                                        <option value="2">ADMIN</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">
+                                    <button class="btn btn-success" type="submit">Add new user</button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--                                   TODO Панель пользователя -->
+<div class="container-fluid" id="user_page" style="display: none">
+    <div class="row">
+        <div class="col-2 bg-white pt-3 min-vh-100 px-0">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="return show('admin_page', 'user_page');">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">User</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col bg-light">
+            <h2><b>  User information-page </b></h2>
+            <div class="container-fluid border bg-light">
+                <h4><b> About user</b></h4>
+            </div>
+            <div class="container-fluid border bg-white px-4 py-3 border-top">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody id="user_info">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TODO модальное окно редактирования-->
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="edit_modal_label"
+     aria-hidden="true">
+    <form class="needs-validation" id="form_edit">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_modal_label">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-auto" style="width: 200px; height: 600px">
+                        <p class="text-center">
+                            <b><label for="id_edit">ID</label></b><br>
+                            <input type="text" name="idEdit"
+                                   readonly
+                                   class="readonly"
+                                   id="id_edit"/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="name_edit">First name</label></b><br>
+                            <input type="text" name="firstNameEdit"
+                                   id="name_edit"
+                                   required/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="lastname_edit">Lastname</label></b><br>
+                            <input type="text" name="lastNameEdit"
+                                   id="lastname_edit"
+                                   required/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="age_edit">Age</label></b><br>
+                            <input type="number" name="ageEdit"
+                                   id="age_edit"
+                                   required/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="username_edit">Email</label></b><br>
+                            <input type="email" name="usernameEdit"
+                                   id="username_edit"
+                                   required/>
+                        </p>
+                        <p class="text-center">
+                            <label for="password_edit"><b>Password</b></label><br>
+                            <input type="password" name="passwordEdit"
+                                   id="password_edit"
+                                   required/>
+                        </p>
+                        <p class="text-center">
+                            <label for="role_edit" ><b>Role</b></label><br>
+                            <select multiple class="form-control "
+                                    id="role_edit"
+                                    name="roles_stringEdit"
+                                    size="2"
+                                    required>
+                                <option value="1">USER</option>
+                                <option value="2">ADMIN</option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- TODO модальное окно удаления  -->
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="delete_modal_label" aria-hidden="true">
+    <form >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete_modal_label">Delete user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-auto" style="width: 200px; height: 500px">
+                        <p class="text-center">
+                            <b><label for="id_delete">ID</label></b>
+                            <input type="text" name="idDelete"
+                                   readonly disabled
+                                   id="id_delete"/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="name_delete">First name</label></b>
+                            <input type="text" name="firstNameDelete"
+                                   readonly disabled
+                                   id="name_delete"/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="lastname_delete">Lastname</label></b>
+                            <input type="text" name="lastNameDelete"
+                                   readonly disabled
+                                   id="lastname_delete"/>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="age_delete">Age</label></b>
+                            <input type="number" name="ageDelete"
+                                   readonly disabled
+                                   id="age_delete"/><br>
+                        </p>
+                        <p class="text-center">
+                            <b><label for="username_delete">Lastname</label></b>
+                            <input type="text" name="usernameDelete"
+                                   readonly disabled
+                                   id="username_delete"/>
+                        </p>
+
+                        <div class="form-group">
+                            <p class="text-center">
+                                <b><label for="role_delete">Role</label></b><br>
+                                <select multiple class="form-control" id="role_delete"
+                                        disabled
+                                        name="roles_stringDelete"
+                                        size="2">
+                                    <option value="1">USER</option>
+                                    <option value="2">ADMIN</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/UsersData.js"></script>
+<script> fillingTable(); </script>
+
+<script type="text/javascript" src="/js/AuthData.js"></script>
+<script>
+    fillHeader(getAuthentication());
+    fillUserAuth(getAuthentication());
+</script>
+</body>
+</html>
