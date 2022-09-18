@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.toboe512</groupId>
 	<artifactId>pp_3.1.4</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>pp_3.1.4</name>
 	<description>Spring Boot REST</description>
 	<properties>
