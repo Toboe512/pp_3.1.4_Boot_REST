@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>ru.toboe512</groupId>
 	<artifactId>pp_3.1.4</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>pp_3.1.4</name>
-	<description>Kata Spring Boot REST</description>
+	<description>Spring Boot REST</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

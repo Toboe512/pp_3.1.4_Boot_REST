@@ -24,7 +24,7 @@ public class UserDTO {
     @Min(value = 0, message = "Age must be a positive number")
     private int age;
 
-    @Size(min = 4, max = 60, message = "Password must be between 4 and 60 characters")
+    @Size(min = 4, max = 61, message = "Password must be between 4 and 60 characters")
     @NotEmpty(message = "Password cannot be empty")
     private String password;
 
