@@ -31,7 +31,7 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public void update(User user) {
-        entityManager.persist(entityManager.merge(user));
+        entityManager.merge(user);
     }
 
     @Override
@@ -53,5 +53,12 @@ public class UserDAOImp implements UserDAO {
         return entityManager.createQuery("from User user where user.username=:email", Role.class)
                 .setParameter("email", user.getEmail())
                 .getSingleResult();
+    }
+
+    public boolean existsUser(User user) {
+        return !entityManager.createQuery("select count(user) from User user where user.username=:email", Long.class)
+                .setParameter("email", user.getEmail())
+                .getSingleResult()
+                .equals(0L);
     }
 }

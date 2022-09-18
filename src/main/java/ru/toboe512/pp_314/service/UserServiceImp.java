@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.toboe512.pp_314.dao.UserDAO;
 import ru.toboe512.pp_314.models.User;
+import ru.toboe512.pp_314.utils.UserNotUniqueException;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public void add(User user) {
+        if (userDAO.existsUser(user)) {
+            throw new UserNotUniqueException("User not unique");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.add(user);
     }

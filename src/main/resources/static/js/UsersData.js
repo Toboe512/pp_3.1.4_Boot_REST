@@ -53,12 +53,14 @@ document.getElementById("create_form")
             roles: $('[name="roles_string"]').val()
         })
     })
-        .then(() => {
-            fillingTable();
-            show("user_table", "new_user");
-
-        })
-        .catch(error => alert(error));
+        .then((response) => {
+            if (response.ok) {
+                fillingTable();
+                show("user_table", "new_user");
+            } else {
+                response.json().then(json => alert(json.message));
+            }
+        });
 });
 
 //TODO модальное окно редактированиея
@@ -106,11 +108,14 @@ document.getElementById("form_edit")
                 roles: $('[name="roles_stringEdit"]').val()
             })
         })
-            .then(() => fillingTable())
-            .catch(error => alert(error));
-
-
-        $("#edit_modal").modal("hide");
+            .then((response) => {
+                if (response.ok) {
+                    $("#edit_modal").modal("hide");
+                } else {
+                    response.json().then(json => alert(json.message));
+                }
+                fillingTable();
+            });
     })
 
 //TODO модальное окно удаления
@@ -150,7 +155,12 @@ document.getElementById("delete_modal")
                 'Content-Type': 'application/json;charset=utf-8'
             }
         })
-            .then(() => fillingTable())
-            .catch(error => alert(error));
-        $("#delete_modal").modal("hide");
-    })
+            .then((response) => {
+                if (response.ok) {
+                    $("#delete_modal").modal("hide");
+                } else {
+                    response.json().then(json => alert(json.message));
+                }
+                fillingTable();
+            });
+    });

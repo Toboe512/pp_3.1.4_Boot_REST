@@ -10,8 +10,8 @@ import ru.toboe512.pp_314.service.UserDTOService;
 import ru.toboe512.pp_314.service.UserService;
 import ru.toboe512.pp_314.utils.UserErrorResponse;
 import ru.toboe512.pp_314.utils.UserNotCreatedException;
+import ru.toboe512.pp_314.utils.UserNotUniqueException;
 
-import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -62,10 +62,10 @@ public class AdminRESTController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<UserErrorResponse> handleException(NoResultException e) {
+    private ResponseEntity<UserErrorResponse> handleException(UserNotUniqueException e) {
         return new ResponseEntity<>(new UserErrorResponse(
-                "User not found",
+                e.getMessage(),
                 System.currentTimeMillis()
-        ), HttpStatus.NOT_FOUND);
+        ), HttpStatus.I_AM_A_TEAPOT);
     }
 }

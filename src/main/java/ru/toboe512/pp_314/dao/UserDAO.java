@@ -19,4 +19,6 @@ public interface UserDAO {
     User getUserByEmail(String email);
 
     Role getRoleByUser(User user);
+
+    boolean existsUser(User user);
 }
