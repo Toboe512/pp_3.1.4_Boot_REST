@@ -64,7 +64,7 @@ public class UserDTOServiceImpl implements UserDTOService{
     public UserDTO userDAOToUserDTO(User user) {
         return new UserDTO(user.getId(),
                 user.getFirstName(),
-                user.getLastname(),
+                user.getLastName(),
                 user.getEmail(),
                 user.getAge(),
                 user.getPassword(),
