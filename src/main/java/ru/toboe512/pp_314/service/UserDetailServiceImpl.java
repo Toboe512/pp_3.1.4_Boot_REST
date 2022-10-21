@@ -24,7 +24,7 @@ public class UserDetailServiceImpl implements UserDetailService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDAO.getUserByEmail(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User name not found!");
+            throw new UsernameNotFoundException(String.format("User '%s' not found!", username));
         }
         return user;
     }
